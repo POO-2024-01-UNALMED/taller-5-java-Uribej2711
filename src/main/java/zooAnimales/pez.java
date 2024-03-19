@@ -1,54 +1,38 @@
 package zooAnimales;
 
-
 import java.util.ArrayList;
 
-
 public class Pez extends Animal{
-	private static ArrayList<Pez> listado=new ArrayList<>();
+	private static ArrayList<Pez> listado;
 	public static int salmones;
 	public static int bacalaos;
-	private String colorEscamas;
+	private  String colorEscamas;
 	private int cantidadAletas;
+	static int cantPe;
+	
+	static {
+		listado = new ArrayList<Pez>();
+	}
+
+	
+	public Pez(String nombre, int edad, String habitat, String genero, String colorEscamas, int cantidadAletas){
+		super(nombre, edad, habitat, genero);
+		this.colorEscamas = colorEscamas;
+		this.cantidadAletas = cantidadAletas;
+		Pez.cantPe++;
+	}
 	
 	public Pez() {
-		this(null,0,null,null,null,0);
+		Pez.cantPe++;
 	}
-	
-	public Pez(String nombre, int edad, String habitat, String genero, String colorEscamas, int cantidadAletas) {
-		super(nombre,edad,habitat,genero);
-		this.colorEscamas=colorEscamas;
-		this.cantidadAletas=cantidadAletas;
-		Pez.listado.add(this);
-	}
-	
-	
-	public static void setListado(ArrayList<Pez> listado) {
-		Pez.listado=listado;
-	}
-	public static ArrayList<Pez> getListado() {
-		return listado;
-	}
-	
-	public void setColorEscamas(String colorEscamas) {
-		this.colorEscamas=colorEscamas;
-	}
-	public String getColorEscamas() {
-		return colorEscamas;
-	}
-	
-	public void setCantidadAletas(int cantidadAletas) {
-		this.cantidadAletas=cantidadAletas;
-		
-	}
-	public int getCantidadAletas() {
-		return cantidadAletas;
-	}
-	
 	
 	public int cantidadPeces() {
-		return Pez.listado.size();
-		
+		int cantidadPe = 0;
+		for (Pez pez : listado) {
+			if (pez != null) {
+			cantidadPe++;}
+		}
+		return cantidadPe;
 	}
 	
 	public String movimiento() {
@@ -56,15 +40,38 @@ public class Pez extends Animal{
 	}
 	
 	public static Pez crearSalmon(String nombre, int edad, String genero) {
-		Pez Pez=new Pez(nombre, edad,"oceano", genero, "rojo", 6);
+	    Pez pez = new Pez(nombre,edad,"oceano",genero,"rojo",6);
+		listado.add(pez);	
 		salmones++;
-		return Pez;
-		
+		return pez;
 	}
 	
 	public static Pez crearBacalao(String nombre, int edad, String genero) {
-		Pez Pez=new Pez(nombre, edad, "oceano", genero, "gris", 6);
+		Pez pez = new Pez(nombre,edad,"oceano",genero,"gris",6);
+		listado.add(pez);	
 		bacalaos++;
-		return Pez;
+		return pez;
 	}
+	
+	public static void setListado(ArrayList<Pez> lista) {
+		listado = lista;
+	}
+	public ArrayList<Pez> getListado() {
+		return listado;
+	}
+	public void setColorEscamas(String colorEscamas) {
+		this.colorEscamas = colorEscamas;
+	}
+	public String getColorEscamas() {
+		return this.colorEscamas;
+	}
+	public void setCantidadAletas(int cantidadAletas) {
+		this.cantidadAletas = cantidadAletas;
+	}
+	public int getCantidadAletas() {
+		return this.cantidadAletas;
+	}
+
+
+
 }
